@@ -120,148 +120,238 @@ def game_hash
 end
 
 
-def num_points_scored(name)
+# def num_points_scored(name)
+#   updated_score = []
+#   game_hash.each do |key, value|
+#     value.each do |attribute, data|
+#       binding.pry
+#       if attribute == :players
+#         data.each do |person, item|
+#           if person == name
+#           item.each do |data, score|
+#           if data == :points
+#             updated_score << score
+#           end 
+#         end
+#       end
+#     end
+#   end
+# end
+# end
+# updated_score.join.to_i
+# end
+
+# def shoe_size(name)
+#   shoe_num = []
+#   game_hash.each do |key, value|
+#     value.each do |attribute, data|
+#       if attribute == :players
+#         data.each do |element, item|
+#         if element == name 
+#           item.each do |el, number|
+#             if el == :shoe 
+#               shoe_num << number
+#             end
+#           end
+#         end
+#       end
+#     end
+#   end
+#   end
+# shoe_num.join.to_i
+# end
+ 
+# def team_colors(team)
+#   home_items = game_hash[:home]
+#   away_items = game_hash[:away]
+
+#   if team == home_items[:team_name] 
+#     home_items[:colors]
+#   elsif team == away_items[:team_name]
+#     away_items[:colors]       
+#   end
+# end
+ 
+# def team_names
+#   both_teams = [] 
+#     both_teams << game_hash[:home][:team_name]
+#     both_teams << game_hash[:away][:team_name]
+#   both_teams
+# end
+
+# def player_numbers(team)
+#   jersey_number = []
+#     if team == game_hash[:home][:team_name]
+#       game_hash[:home][:players].each do |key, value|
+#         value.each do |attribute, data|    
+#         jersey_number << data if attribute == :number
+#         end
+#       end
+#     elsif team == game_hash[:away][:team_name]
+#       game_hash[:away][:players].each do |key, value|
+#         value.each do |attribute, data|    
+#         jersey_number << data if attribute == :number
+#         end
+#       end
+#     end
   
-  updated_score = []
-  game_hash.each do |key, value|
-    value.each do |attribute, data|
-      if attribute == :players
-        data.each do |person, item|
-           if person == name
-          item.each do |data, score|
-          if data == :points
-            updated_score << score
-          end 
+#   jersey_number   
+# end
+
+# def player_stats(name)
+#   game_hash.each do |key,value|
+#     value.each do |attribute, data|
+#       if attribute == :players
+#         data.each do |player, stats|
+#         if player == name
+#         return stats
+#         end
+#         end
+#       end
+#     end
+#   end
+# end 
+
+# def big_shoe_rebounds
+# shoe_size = []
+#   game_hash.each do |key,value|
+#     value.each do |attribute, data|
+#       if attribute == :players
+#       data.each do |player, stats|
+#       stats.each do |item, num|
+#         if item == :shoe     
+#           shoe_size << num
+#         end
+#       end
+#       end
+#       end
+#     end
+#   end  
+#   biggest = shoe_size.max
+
+#   def find_player(biggest)
+#     name = []
+#     game_hash.each do |key,value|
+#       value.each do |attribute, data|
+#         if attribute == :players
+#         data.each do |player, stats|
+#           stats.each do |item, num|
+#           if item == :shoe  && num == biggest
+#             name << player
+#           end
+#           end
+#           player_name = name.join
+#           if player == player_name
+#             stats.each do |k, v|
+#               if k == :rebounds
+#                 return v
+#               end
+#             end
+#         end
+#         end
+#         end
+#       end
+#   end
+#   end
+#   find_player(biggest)
+# end
+
+
+#Refactor
+def num_points_scored(name)
+  result = nil
+  game_hash.each do |base, team_data|
+    team_data.each do |data,info|
+      if data == :players 
+        info.each do |player, player_data|
+          if player == name
+            player_data.each do |attribute, number|
+              result = number if attribute == :points
+            end
+          end
         end
       end
     end
   end
- end
-end
- updated_score.join.to_i
-end
+  result
+end 
+
 
 def shoe_size(name)
-  shoe_num = []
-   game_hash.each do |key, value|
-    value.each do |attribute, data|
-      if attribute == :players
-        data.each do |element, item|
-         if element == name 
-           item.each do |el, number|
-             if el == :shoe 
-               shoe_num << number
-             end
-           end
-         end
-       end
-     end
-   end
-  end
- shoe_num.join.to_i
- end
- 
- 
- def team_colors(team)
-   home_items = game_hash[:home]
-   away_items = game_hash[:away]
-
-   if team == home_items[:team_name] 
-     home_items[:colors]
-   elsif team == away_items[:team_name]
-    away_items[:colors]       
-   end
- end
- 
- 
-def team_names
-  both_teams = [] 
-    both_teams << game_hash[:home][:team_name]
-    both_teams << game_hash[:away][:team_name]
-
- both_teams
-end
-
-def player_numbers(team)
-  jersey_number = []
-    if team == game_hash[:home][:team_name]
-      game_hash[:home][:players].each do |key, value|
-        value.each do |attribute, data|    
-        jersey_number << data if attribute == :number
-        end
-      end
-    elsif team == game_hash[:away][:team_name]
-      game_hash[:away][:players].each do |key, value|
-        value.each do |attribute, data|    
-        jersey_number << data if attribute == :number
+  result = nil
+  game_hash.each do |base, team_data|
+    team_data.each do |data,info|
+      if data == :players 
+        info.each do |player, player_data|
+          if player == name
+            player_data.each do |attribute, number|
+              result = number if attribute == :shoe
+            end
+          end
         end
       end
     end
-  
-  jersey_number   
+  end
+  result
+end
+
+
+def team_colors(team)
+  game_hash.map do |base, team_data|
+    if team_data[:team_name] == team
+      team_data[:colors]
+    end
+  end.compact.flatten
+end
+
+
+def team_names
+  team_array = []
+    team_array << game_hash[:home][:team_name]
+    team_array <<  game_hash[:away][:team_name]
+end
+
+
+def player_numbers(team)
+  number = []
+  game_hash.each do  |base, team_data|
+    if team_data[:team_name] == team 
+      team_data[:players].each do |player, data|
+        number << data[:number]
+      end
+    end
+  end
+  number
 end
 
 
 def player_stats(name)
-  game_hash.each do |key,value|
-    value.each do |attribute, data|
-      if attribute == :players
-        data.each do |player, stats|
-        if player == name
-        return stats
-        end
-        end
+  game_hash.each do |base, team_data|
+    team_data[:players].each do |player, data|
+      if player == name
+        return data
       end
     end
   end
-end 
-
+end
 
 def big_shoe_rebounds
- shoe_size = []
- 
-  game_hash.each do |key,value|
-    value.each do |attribute, data|
-      if attribute == :players
-      data.each do |player, stats|
-      stats.each do |item, num|
-        if item == :shoe     
-          shoe_size << num
+  shoe_size = []
+  rebound_arr = []
+  game_hash.each do |base, team_data|
+    team_data.each do |data,info|
+      if data == :players
+        info.each do |player, details|
+           shoe_size << details[:shoe]
+           rebound_arr << details[:rebounds]
         end
-      end
-      end
       end
     end
-  end  
-  biggest = shoe_size.max
-
-
-  def find_player(biggest)
-    name = []
-    game_hash.each do |key,value|
-      value.each do |attribute, data|
-        if attribute == :players
-        data.each do |player, stats|
-          stats.each do |item, num|
-          if item == :shoe  && num == biggest
-            name << player
-          end
-          end
-          player_name = name.join
-          if player == player_name
-            stats.each do |k, v|
-              if k == :rebounds
-                return v
-              end
-            end
-         end
-        end
-        end
-      end
-   end
   end
-  find_player(biggest)
+  index = shoe_size.index(shoe_size.max)
+  rebound_arr[index]
 end
+
 
 
       
