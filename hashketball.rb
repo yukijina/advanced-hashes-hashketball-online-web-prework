@@ -389,7 +389,7 @@ def winning_team
   def calc(score_arr)
     score_arr.inject {|sum, num| sum += num}
   end
-
+ 
   if calc(home_score) > calc(away_score)
     game_hash[:home][:team_name]
   else
