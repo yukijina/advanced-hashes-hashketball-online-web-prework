@@ -370,7 +370,6 @@ def most_points_scored
   index = points_arr.index(points_arr.max)
   players_arr[index]
 end
-#most_points_scored
 
 def winning_team
   home_score = []
