@@ -353,6 +353,92 @@ def big_shoe_rebounds
 end
 
 
+#Bonus
+def most_points_scored
+  points_arr = []
+  players_arr = []
+  game_hash.each do |base, team_data|
+    team_data.each do |data,info|
+      if data == :players
+        info.each do |player, details|
+           points_arr << details[:points]
+           players_arr << player
+        end
+      end
+    end
+  end
+  index = points_arr.index(points_arr.max)
+  players_arr[index]
+end
+#most_points_scored
+
+def winning_team
+  home_score = []
+  away_score = []
+  game_hash.each do |base, team_data|
+    team_data.each do |data,info|
+      if data == :players
+        info.each do |player, details|
+           home_score << details[:points] if base == :home
+           away_score << details[:points] if base == :away
+        end
+      end
+    end
+  end
+  
+  def calc(score_arr)
+    score_arr.inject {|sum, num| sum += num}
+  end
+
+  if calc(home_score) > calc(away_score)
+    game_hash[:home][:team_name]
+  else
+    game_hash[:away][:team_name]
+  end
+end
+
+def player_with_longest_name
+  name_length = []
+  player_arr = []
+  game_hash.each do |base, team_data|
+    team_data.each do |data,info|
+      if data == :players
+        info.each do |player, details|
+           name_length << player.length
+           player_arr << player
+        end
+      end
+    end
+  end
+  index = name_length.index(name_length.max)
+  player_arr[index]
+end
+
+#Super Bonus
+def long_name_steals_a_ton?
+  steals_arr = []
+  player_arr = []
+  game_hash.each do |base, team_data|
+    team_data.each do |data,info|
+      if data == :players
+        info.each do |player, details|
+           steals_arr << details[:steals]  
+           player_arr << player 
+        end
+      end
+    end
+  end
+  index = player_arr.index(player_with_longest_name)
+  if steals_arr.max == steals_arr[index]
+    true
+  else 
+    false
+  end
+end
+
+
+
+
 
       
 
