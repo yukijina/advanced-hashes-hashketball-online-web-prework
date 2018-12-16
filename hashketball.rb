@@ -385,6 +385,7 @@ def winning_team
     end
   end
   
+  #calcurate scores each team
   def calc(score_arr)
     score_arr.inject {|sum, num| sum += num}
   end
